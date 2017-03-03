@@ -28,6 +28,33 @@ class EncounterManager{
         
     }
     
+    func saveSpritePositions(node: SKNode){
+        for sprite in node.children{
+            if let spriteNode = sprite as? SKSpriteNode{
+                let initialPositionValue = NSValue(cgPoint: spriteNode.position)
+                spriteNode.userData = ["initialPosition": initialPositionValue]
+                saveSpritePositions(node: spriteNode)
+                
+            }
+        }
+    
+    }
+    
+    func resetSpritePositions(node: SKNode){
+        for sprite in node.children{
+            if let spriteNode = sprite as? SKSpriteNode{
+                spriteNode.zRotation = 0
+                spriteNode.physicsBody?.angularVelocity = 0
+                spriteNode.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+                if let initialPositionValue = spriteNode.userData?.value(forKey: "initialPosition") as? NSValue{
+                    spriteNode.position = initialPositionValue.cgPointValue
+                }
+                
+                resetSpritePositions(node: spriteNode)
+            }
+        }
+    }
+    
     init(){
         
         for fileName in encounterNames{

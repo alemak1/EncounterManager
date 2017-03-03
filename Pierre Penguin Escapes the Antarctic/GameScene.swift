@@ -8,6 +8,10 @@ class GameScene: SKScene {
     
     var screenCenterY = CGFloat()
     
+    //Use these variables to keep track of the Encounters currently on the screen
+    var currentEncounterIndex: Int?
+    var previousEncounterIndex: Int?
+    
     let initialPlayerPosition = CGPoint(x: 150, y: 250)
     var playerProgress = CGFloat()
 
