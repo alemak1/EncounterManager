@@ -12,12 +12,70 @@ import SpriteKit
 
 class EncounterManager{
     
-    let encounterName: [String] = [
+    let encounterNames: [String] = [
         "EncounterBats",
         "EncounterBees",
         "EncounterMadFlies"
     ]
     
-    let encounters: [SKNode] = []
+    var encounters: [SKNode] = []
 
+    init(){
+        
+        for fileName in encounterNames{
+            let encounter = SKNode()
+            
+            if let scene = SKScene(fileNamed: fileName){
+             
+                for childNode in scene.children{
+                    
+                    if let skNode = childNode as? SKNode{
+                        
+                        switch(skNode.name!){
+                        case "Bat":
+                            let bat = Bat();
+                            bat.position = skNode.position
+                            bat.move(toParent: encounter)
+                            break
+                        case "MadFly":
+                            let madFly = MadFly();
+                            madFly.position = skNode.position
+                            madFly.move(toParent: encounter)
+                            break
+                        case "Bee":
+                            let bee = Bee();
+                            bee.position = skNode.position
+                            bee.move(toParent: encounter)
+                            break
+                        case "Blade":
+                            let blade = Blade();
+                            blade.move(toParent: encounter)
+                            break
+                        case "GoldCoin":
+                            let coin = Coin()
+                            coin.position = skNode.position
+                            coin.move(toParent: encounter)
+                            coin.turnToGold()
+                            break
+                        case "BronzeCoin":
+                            let coin = Coin()
+                            coin.position = skNode.position
+                            coin.move(toParent: encounter)
+                            break
+                        default:
+                            print("Name error: \(skNode.name)")
+                            
+                        }
+                    }
+                    
+                }
+                
+                encounters.append(encounter)
+                
+                
+            }
+        }
+        
+    }
+    
 }
