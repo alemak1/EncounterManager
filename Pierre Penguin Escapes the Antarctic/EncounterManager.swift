@@ -18,7 +18,7 @@ class EncounterManager{
         "EncounterMadFlies"
     ]
     
-    var currentEncounterIndex: Int?
+    var currentEncounterIndex: Int? 
     var previousEncounterIndex: Int?
     
     var encounters: [SKNode] = []
@@ -32,7 +32,7 @@ class EncounterManager{
         var trulyNew: Bool?
         
         
-        while(trulyNew == false || trulyNew == true){
+        while(trulyNew == false || trulyNew == nil){
             nextEncounterIndex = Int(arc4random_uniform(encounterCount))
             trulyNew = true
             

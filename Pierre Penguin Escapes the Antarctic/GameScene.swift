@@ -8,9 +8,7 @@ class GameScene: SKScene {
     
     var screenCenterY = CGFloat()
     
-    //Use these variables to keep track of the Encounters currently on the screen
-    var currentEncounterIndex: Int?
-    var previousEncounterIndex: Int?
+    var nextEncounterSpawnPosition = CGFloat(150)
     
     let initialPlayerPosition = CGPoint(x: 150, y: 250)
     var playerProgress = CGFloat()
@@ -111,6 +109,11 @@ class GameScene: SKScene {
         
         // Check to see if the ground should jump forward:
         ground.checkForReposition(playerProgress: playerProgress)
+        
+        if player.position.x > nextEncounterSpawnPosition{
+            encounterManager.placeNextEncounter(currentXPos: nextEncounterSpawnPosition)
+            nextEncounterSpawnPosition += 1400
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
