@@ -20,6 +20,14 @@ class EncounterManager{
     
     var encounters: [SKNode] = []
 
+    func addEncountersToWorld(world: SKNode){
+        for index in 0...encounters.count-1{
+            encounters[index].position = CGPoint(x: -2000, y: index*1000)
+            world.addChild(encounters[index])
+        }
+        
+    }
+    
     init(){
         
         for fileName in encounterNames{
