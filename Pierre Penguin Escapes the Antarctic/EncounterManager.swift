@@ -18,8 +18,46 @@ class EncounterManager{
         "EncounterMadFlies"
     ]
     
+    var currentEncounterIndex: Int?
+    var previousEncounterIndex: Int?
+    
     var encounters: [SKNode] = []
-
+    
+    func placeNextEncounter(currentXPos: CGFloat){
+        let encounterCount = UInt32(encounters.count)
+        
+        if(encounterCount < 3) { return }
+        
+        var nextEncounterIndex: Int?
+        var trulyNew: Bool?
+        
+        
+        while(trulyNew == false || trulyNew == true){
+            nextEncounterIndex = Int(arc4random_uniform(encounterCount))
+            trulyNew = true
+            
+            if let currentIndex = currentEncounterIndex{
+                if(nextEncounterIndex == currentIndex){
+                    trulyNew = false
+                }
+            }
+            
+            if let previousIndex = previousEncounterIndex{
+                if(nextEncounterIndex == previousIndex){
+                    trulyNew = false
+                }
+            }
+        }
+        
+        previousEncounterIndex = currentEncounterIndex
+        currentEncounterIndex = nextEncounterIndex
+        
+        let encounter = encounters[currentEncounterIndex!]
+        encounter.position = CGPoint(x: currentXPos + 1000.0, y: 0.0)
+        resetSpritePositions(node: encounter)
+        
+    }
+    
     func addEncountersToWorld(world: SKNode){
         for index in 0...encounters.count-1{
             encounters[index].position = CGPoint(x: -2000, y: index*1000)
@@ -106,7 +144,7 @@ class EncounterManager{
                 }
                 
                 encounters.append(encounter)
-                
+                saveSpritePositions(node: encounter)
                 
             }
         }
