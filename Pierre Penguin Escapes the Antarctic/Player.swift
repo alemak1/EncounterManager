@@ -106,7 +106,7 @@ class Player : SKSpriteNode, GameSprite {
         
         // Set a constant velocity to the right:
         // REMOVE THIS COMMENT BEFORE STARTING CHAPTER 6
-        //self.physicsBody?.velocity.dx = 200
+        self.physicsBody?.velocity.dx = 200
     }
     
     // Begin the flap animation, set flapping to true:

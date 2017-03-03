@@ -4,6 +4,7 @@ class GameScene: SKScene {
     let cam = SKCameraNode()
     let ground = Ground()
     let player = Player()
+    let encounterManager = EncounterManager()
     
     var screenCenterY = CGFloat()
     
@@ -42,36 +43,41 @@ class GameScene: SKScene {
         // Store the vertical center of the screen:
         screenCenterY = self.size.height / 2
         
-        // Spawn a bat:
-        let bat = Bat()
-        bat.position = CGPoint(x: 400, y: 200)
-        self.addChild(bat)
+//        // Spawn a bat:
+//        let bat = Bat()
+//        bat.position = CGPoint(x: 400, y: 200)
+//        self.addChild(bat)
+//        
+//        // A blade:
+//        let blade = Blade()
+//        blade.position = CGPoint(x: 300, y: 76)
+//        self.addChild(blade)
+//        
+//        // A mad fly:
+//        let madFly = MadFly()
+//        madFly.position = CGPoint(x: 50, y: 50)
+//        self.addChild(madFly)
+//        
+//        // A bronze coin:
+//        let bronzeCoin = Coin()
+//        bronzeCoin.position = CGPoint(x: -50, y: 250)
+//        self.addChild(bronzeCoin)
+//        
+//        // A gold coin:
+//        let goldCoin = Coin()
+//        goldCoin.position = CGPoint(x: 25, y: 250)
+//        goldCoin.turnToGold()
+//        self.addChild(goldCoin)
+//        
+//        // The powerup star:
+//        let star = Star()
+//        star.position = CGPoint(x: 250, y: 250)
+//        self.addChild(star)
         
-        // A blade:
-        let blade = Blade()
-        blade.position = CGPoint(x: 300, y: 76)
-        self.addChild(blade)
+        encounterManager.addEncountersToWorld(world: self)
+        encounterManager.encounters[0].position = CGPoint(x: 600, y: 0)
         
-        // A mad fly:
-        let madFly = MadFly()
-        madFly.position = CGPoint(x: 50, y: 50)
-        self.addChild(madFly)
         
-        // A bronze coin:
-        let bronzeCoin = Coin()
-        bronzeCoin.position = CGPoint(x: -50, y: 250)
-        self.addChild(bronzeCoin)
-        
-        // A gold coin:
-        let goldCoin = Coin()
-        goldCoin.position = CGPoint(x: 25, y: 250)
-        goldCoin.turnToGold()
-        self.addChild(goldCoin)
-        
-        // The powerup star:
-        let star = Star()
-        star.position = CGPoint(x: 250, y: 250)
-        self.addChild(star)
     }
     
     override func didSimulatePhysics() {
